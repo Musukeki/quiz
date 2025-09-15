@@ -27,5 +27,6 @@ public interface UserDao extends JpaRepository<User, String> {
 			+ " (?1, ?2, ?3, ?4, ?5) ",
 			nativeQuery = true)
 	public void addInfo(String name, String phone, String email, int age, String password);
+	
 
 }

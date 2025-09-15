@@ -15,7 +15,15 @@ public enum ResCodeMessage {
 	 TEXT_HAS_OPTIONS_ERROR(400, "Text Has Options Error!!"),
 	 QUIZ_UPDATE_FAILED(400, "Quiz Update Failed!!"), //
 	 OPTIONS_TRANSFER_ERROR(400, "Options Transfer Error!!"),
-	 QUIZ_ID_ERROR(400, "Quiz Id Error!!"),
+	 QUIZ_ID_ERROR(400, "Quiz Id Error!!"),//
+	 QUIZ_DELETE_FAILED(400, "Quiz Delete Error!!"),//
+	 QUIZ_CANNOT_BE_EDITED(400, "Quiz Cannot Be Edited!!"),//
+	 QUIZ_STARTED_NO_DELETE(400, "Quiz Already Started, Can't Delete"),//
+	 ANSWER_REQUIRED(400, "Answer Required!!"),//
+	 QUESTION_TYPE_IS_SINGLE(400, "Question Type Is Single!!"),//
+	 OPTION_ANSWER_MISSMATCH(400, "Option Answer Missmatch!!"),//
+	 EMAIL_DUPLICATED(400, "Email Duplicated!!"),//
+	 OBJECT_MAPPER_PROCESSING_ERROR(400, "Object Mapper Processing Error!!"),//
 	 
 	;
 	private int code;

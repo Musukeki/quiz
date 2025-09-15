@@ -11,6 +11,8 @@ import com.example.quiz.service.ifs.UserService;
 import com.example.quiz.vo.AddInfoReq;
 import com.example.quiz.vo.BasicRes;
 import com.example.quiz.vo.LoginReq;
+import com.example.quiz.vo.LoginRes;
+import com.example.quiz.vo.UserInfoRes;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -62,6 +64,27 @@ public class UserServiceImpl implements UserService {
 		return new BasicRes(ResCodeMessage.SUCCESS.getCode(),//
 				 ResCodeMessage.SUCCESS.getMessage());
 	}
+
+
+	@Override
+	public LoginRes loginAndGetAll(LoginReq req) {
+		User user = userDao.getByEmail(req.getEmail());
+	    if (user == null) {
+	        return new LoginRes("404", "帳號不存在", null);
+	    }
+	    if (!encoder.matches(req.getPassword(), user.getPassword())) {
+	        return new LoginRes("401", "密碼錯誤", null);
+	    }
+
+	    UserInfoRes info = new UserInfoRes();
+	    info.setName(user.getName());
+	    info.setPhone(user.getPhone());
+	    info.setEmail(user.getEmail());
+	    info.setAge(user.getAge());
+
+	    return new LoginRes("200", "登入成功", info);
+	}
+
 
 
 	

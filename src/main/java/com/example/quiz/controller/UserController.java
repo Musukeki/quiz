@@ -10,6 +10,7 @@ import com.example.quiz.service.ifs.UserService;
 import com.example.quiz.vo.AddInfoReq;
 import com.example.quiz.vo.BasicRes;
 import com.example.quiz.vo.LoginReq;
+import com.example.quiz.vo.LoginRes;
 
 import jakarta.validation.Valid;
 
@@ -35,5 +36,9 @@ public class UserController {
 		return userService.login(req);
 	}
 	
-	
+	@PostMapping("user/logins")
+	public LoginRes loginV2(@Valid @RequestBody LoginReq req) {
+	    return userService.loginAndGetAll(req);
+	}
+
 }

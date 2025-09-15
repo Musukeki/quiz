@@ -2,6 +2,7 @@ package com.example.quiz.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -45,13 +46,13 @@ public interface QuizDao extends JpaRepository<Quiz, Integer> {
 			nativeQuery = true)
 	public List<Quiz> getAll();
 	
-	@Query(value = "select * from quiz where name like = %?1% and start_date >= ?2 "//
+	@Query(value = "select * from quiz where name like %?1% and start_date >= ?2 "//
 			+ " end_date <= ?3", //
 			nativeQuery = true)
 	public List<Quiz> getAll(String name, LocalDate startDate, LocalDate endDate);
 	
 	// is_published is true: is 只能用在 boolean 值的欄位，is 也可以替換成(=)
-	@Query(value = "select * from quiz where name like = %?1% and start_date >= ?2 "//
+	@Query(value = "select * from quiz where name like %?1% and start_date >= ?2 "//
 			+ " end_date <= ?3 and is_published is true", //
 			nativeQuery = true)
 	public List<Quiz> getAllPublished(String name, LocalDate startDate, LocalDate endDate);
@@ -61,6 +62,28 @@ public interface QuizDao extends JpaRepository<Quiz, Integer> {
 	@Query(value = "delete from quiz where id = ?1", //
 			nativeQuery = true)
 	public void deleteById(int id);
+	
+	@Query(value = "select * from quiz where id = ?1", //
+			nativeQuery = true)
+	public Quiz getById(int id);
+
+
+	// ============= 以下死三代碼
+	
+	@Query(value = "select name, description from quiz where id = ?1", //
+			nativeQuery = true)
+	public List<Quiz> getQuizAndQuesById(int id);
+	
+	// 判斷該問卷是否已發布及當下的日期是否介於開始日期和結束日期之間
+	@Query(value = "select count(id) from quiz where id = ?1 and ?2 >= start_date "//
+			+ " and ?2 <=  end_date and is_published is true", //
+			nativeQuery = true)
+	public int selectCountById(int id, LocalDate now);
+	
+	
+	
+	
+	
 	
 	
 	
